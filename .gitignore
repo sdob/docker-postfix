@@ -1,0 +1,9 @@
+debug.sh
+sftp-config.json
+assets/domainkeys/mail.*
+
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
