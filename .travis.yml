@@ -2,3 +2,10 @@ sudo: required
 
 services:
   - docker
+
+before_install:
+  - docker build -t docker-postfix .
+  - docker run docker-postfix /bin/sh -c "echo \"OK\""
+
+script:
+  - echo "OK"
