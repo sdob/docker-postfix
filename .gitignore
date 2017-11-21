@@ -7,3 +7,6 @@ assets/domainkeys/mail.*
 [._]*.sw[a-p]
 [._]s[a-v][a-z]
 [._]sw[a-p]
+
+# Environment variables
+.env
