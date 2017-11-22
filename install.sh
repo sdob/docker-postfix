@@ -10,6 +10,7 @@ hosts = $db_host
 user = $db_user
 password = $db_password
 dbname = $db_name
+query = SELECT user_id from addresses_address where alias='%s'
 EOF
 
 #####################
@@ -20,6 +21,9 @@ EOF
 
 # Set mail host
 postconf -e "myhostname=$mailhost"
+
+# Use PostgreSQL lookup for aliasdes
+postconf -e "alias_maps=pgsql:/etc/postfix/pgsql-aliases.cf"
 
 # Disable VRFY command
 postconf -e "disable_vrfy_command=yes"
