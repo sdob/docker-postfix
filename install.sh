@@ -22,7 +22,7 @@ EOF
 # Set mail host
 postconf -e "myhostname=$mailhost"
 
-# Use PostgreSQL lookup for aliasdes
+# Use PostgreSQL lookup for aliases
 postconf -e "alias_maps=pgsql:/etc/postfix/pgsql-aliases.cf"
 
 # Disable VRFY command
