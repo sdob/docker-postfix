@@ -6,7 +6,7 @@ This is the Docker configuration for the masqt Postfix forwarding server.
 
 You'll need a working copy of [Docker](https://www.docker.com/).
 
-1. Copy `env.example` to `.env` and change the values in `.env` to point to the correct database for your masqt backend.
+1. Copy `env.example` to `.env` and change the values in `.env` to point to the correct database for your masqt backend instance.
 1. Build the docker image: `docker build -t docker-postfix .`
 1. Run the image with your environment variables: `docker run --env-file .env --name postfix docker-postfix`
 1. (Optional) Get a shell in the image: `docker exec -it postfix "/bin/bash"`
