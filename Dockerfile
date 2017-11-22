@@ -1,17 +1,21 @@
+# This is our source image
 FROM ubuntu:zesty
 
-RUN echo "postfix postfix/mailname string your.hostname.com" | debconf-set-selections
+# Echo these to debconf-set-selections to make postfix installation non-interactive
+RUN echo "postfix postfix/mailname string $mailhost" | debconf-set-selections
 RUN echo "postfix postfix/main_mailer_type string \"Internet Site\"" | debconf-set-selections
 
-# Update
+# Update packages
 RUN apt-get update
 
 # Install packages
-RUN apt-get -y install supervisor postfix python3
-RUN apt-get -y install postfix-pgsql
+RUN apt-get -y install postfix postfix-pgsql
+# TODO Remove the following packages when we have a working configuration; they're
+# just for debugging
+RUN apt-get -y install less vim
 
 # Add install script
 ADD ./install.sh /opt/install.sh
 
-# Run!
-CMD /opt/install.sh;/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+# Run the install script, then start Postfix
+CMD ["sh", "-c", "/opt/install.sh ; service postfix start ; tail -F /var/log/mail.log"]
