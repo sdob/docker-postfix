@@ -10,3 +10,6 @@ assets/domainkeys/mail.*
 
 # Environment variables
 .env
+
+# Python virtualenv
+venv/
