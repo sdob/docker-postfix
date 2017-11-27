@@ -20,9 +20,9 @@ RUN apt-get -y install less vim python3
 # Add install script
 ADD ./install.sh /opt/install.sh
 # Add env variables
-ADD .env .env
+ADD /tmp/.env /tmp/.env
 
-RUN eval $(cat .env | sed 's/^/export /')
+RUN eval $(cat /tmp/.env | sed 's/^/export /')
 
 # Run the install script, then start Postfix
 CMD ["sh", "-c", "/opt/install.sh ; service postfix start ; tail -F /var/log/mail.log"]
