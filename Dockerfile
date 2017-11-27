@@ -20,7 +20,7 @@ RUN apt-get -y install less vim python3
 # Add install script
 ADD ./install.sh /opt/install.sh
 # Add env variables
-ADD /tmp/.env /tmp/.env
+COPY /tmp/.env /tmp/.env
 
 RUN eval $(cat /tmp/.env | sed 's/^/export /')
 
