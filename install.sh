@@ -1,6 +1,13 @@
 # This script runs before the Postfix service starts;
 # we do all our configuration stuff in here.
 
+# Get environment variables
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ENV_FILE="${DIR}/.env"
+eval $(cat $ENV_FILE | sed 's/^/export /')
+
+echo $mailhost
+
 ################################
 # Configure Postfix-Postgresql #
 ################################
@@ -31,7 +38,8 @@ chmod +x /opt/postfix.sh
 # See http://flurdy.com/docs/postfix/
 
 # Set mail host
-postconf -e "myhostname=$mailhost"
+# TODO: uncomment this when we can figure out how to stop it from barfing
+# postconf -e "myhostname=$mailhost"
 
 # Use PostgreSQL lookup for aliases
 postconf -e "alias_maps=pgsql:/etc/postfix/pgsql-aliases.cf"
