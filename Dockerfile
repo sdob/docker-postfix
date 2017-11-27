@@ -12,7 +12,7 @@ RUN apt-get update
 RUN apt-get -y install postfix postfix-pgsql
 # TODO Remove the following packages when we have a working configuration; they're
 # just for debugging
-RUN apt-get -y install less vim
+RUN apt-get -y install less vim python3
 
 # Add install script
 ADD ./install.sh /opt/install.sh
