@@ -8,6 +8,21 @@ eval $(cat $ENV_FILE | sed 's/^/export /')
 
 echo $mailhost
 
+########################
+# Configure supervisor #
+########################
+
+cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
+[supervisord]
+nodaemon=true
+
+[program:postfix]
+command=/opt/postfix.sh
+
+[program:rsyslog]
+command=/usr/sbin/rsyslogd -n -c3
+EOF
+
 ################################
 # Configure Postfix-Postgresql #
 ################################
@@ -38,8 +53,7 @@ chmod +x /opt/postfix.sh
 # See http://flurdy.com/docs/postfix/
 
 # Set mail host
-# TODO: uncomment this when we can figure out how to stop it from barfing
-# postconf -e "myhostname=$mailhost"
+postconf -e "myhostname=$mailhost"
 
 # Use PostgreSQL lookup for aliases
 postconf -e "alias_maps=pgsql:/etc/postfix/pgsql-aliases.cf"
