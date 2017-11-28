@@ -32,4 +32,4 @@ RUN apt-get -qq install postfix postfix-pgsql supervisor
 RUN apt-get -qq install less vim python3
 
 # Run the install script, then start Postfix
-CMD ["sh", "-c", "/opt/install.sh ; service postfix start ; tail -F /var/log/mail.log"]
+CMD /opt/install.sh ; /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
