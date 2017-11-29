@@ -4,11 +4,9 @@ services:
   - docker
 
 before_install:
+  - touch .env
   - docker build -t docker-postfix .
   - docker run docker-postfix /bin/sh -c "echo \"OK\""
-
-before_script:
-  - touch .env
 
 script:
   - echo "OK"
